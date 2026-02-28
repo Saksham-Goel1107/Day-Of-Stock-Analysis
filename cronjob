@@ -1,0 +1,5 @@
+# For scheduling production task inside Docker
+# Minute   Hour   Day of Month   Month   Day of Week   Command
+# Example: Runs every morning at 6:00 AM Container time
+0 6 * * * root cd /app && /usr/local/bin/python analysis.py >> /var/log/cron.log 2>&1
+# Tip: Make sure Docker is set to the same timezone as you, or adjust times!
