@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  stock-analyzer:
+    build: .
+    container_name: stock-analyzer-cron
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./service.json:/app/service.json:ro
+    environment:
+      - TZ=Asia/Kolkata # Sets the cron schedule timezone (adjust if needed)
+    healthcheck:
+      test: ["CMD-SHELL", "service cron status || exit 1"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
